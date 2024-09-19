@@ -1,0 +1,4 @@
+/venv
+/project_key.json
+/__pycache__
+/config.local

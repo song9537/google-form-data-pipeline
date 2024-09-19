@@ -1,6 +1,5 @@
 import os
 import json
-import re
 import google.auth
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
@@ -36,30 +35,9 @@ def google_extract_value(id_key):
     return values
 
 
-# Define a function to format the data
-def format_data(rows):
-    formatted_data = []
-
-    for row in rows[1:]:  # Skip the header row (first row)
-        timestamp = row[0].split(" ")[0]  # Extract just the date (removing the time)
-        names_column = row[1]
-
-        # Use regex to find all names (ignoring numbers in parentheses)
-        names = re.findall(r"[\uAC00-\uD7A3]+", names_column)
-
-        # Prepend the timestamp to the list of names
-        formatted_row = [timestamp] + names
-        formatted_data.append(formatted_row)
-
-    return formatted_data
-
-
 def data_extraction(id_key):
 
     # Extract data from google form
     extracted_data = google_extract_value(id_key)
 
-    # Format the fetched data
-    formatted_data = format_data(extracted_data)
-
-    return formatted_data
+    return extracted_data
