@@ -46,7 +46,6 @@ def insert_data(connection, date, student_name, form_id):
         VALUES (%s, %s, %s);
         """
         cursor.execute(insert_query, (date, student_name, form_id))
-        print("Data inserted successfully")
     except Exception as error:
         print(f"Error while inserting data: {error}")
 
